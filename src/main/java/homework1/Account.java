@@ -1,16 +1,17 @@
 package homework1;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.Objects;
 
 public class Account {
     private String firstName;
     private String lastName;
     private String country;
-    private Date birthdate;
-    private float balance;
+    private LocalDate birthdate;
+    private double balance;
     private String gender;
 
-    public Account(String firstName, String lastName, String country, Date birthdate, float balance, String gender) {
+    public Account(String firstName, String lastName, String country, LocalDate birthdate, double balance, String gender) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.country = country;
@@ -43,19 +44,19 @@ public class Account {
         this.country = country;
     }
 
-    public Date getBirthdate() {
+    public LocalDate getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
 
-    public float getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(float balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
@@ -69,12 +70,31 @@ public class Account {
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        if(this==obj){
+            return true;
+        }
+        if(obj==null){
+            return false;
+        }
+        if(!(obj instanceof Account)){
+            return false;
+        }
+        Account account = (Account) obj;
+        if(account.firstName.equals(this.firstName)
+                && account.lastName.equals(this.lastName)
+                && account.country.equals(this.country)
+                && account.birthdate.equals(this.birthdate)
+                && account.balance == this.balance
+                && account.gender == this.gender)
+        {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return Objects.hash(firstName,lastName,country,birthdate,balance,gender);
     }
 
     @Override
